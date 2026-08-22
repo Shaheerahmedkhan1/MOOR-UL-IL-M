@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { adminAuth, adminDb } from "@/lib/firebaseAdmin";
+import {
+  adminAuth,
+  adminDb,
+} from "@/lib/firebaseAdmin";
+
+export const dynamic = "force-dynamic";
 
 const ADMIN_EMAIL =
   "hafizshaheerahmedkhan@gmail.com";
@@ -58,7 +63,9 @@ export async function GET(request) {
     await verifyAdmin(request);
 
     const snap =
-      await adminDb.collection("users").get();
+      await adminDb
+        .collection("users")
+        .get();
 
     const users = snap.docs.map((doc) => {
       const data = doc.data();
@@ -86,23 +93,36 @@ export async function GET(request) {
       error
     );
 
-    if (error.message === "UNAUTHORIZED") {
+    if (
+      error?.message === "UNAUTHORIZED"
+    ) {
       return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
+        {
+          error: "Unauthorized",
+        },
+        {
+          status: 401,
+        }
       );
     }
 
-    if (error.message === "FORBIDDEN") {
+    if (
+      error?.message === "FORBIDDEN"
+    ) {
       return NextResponse.json(
-        { error: "Forbidden" },
-        { status: 403 }
+        {
+          error: "Forbidden",
+        },
+        {
+          status: 403,
+        }
       );
     }
 
     return NextResponse.json(
       {
-        error: "Unable to load users.",
+        error:
+          "Unable to load users.",
       },
       {
         status: 500,
@@ -120,7 +140,8 @@ export async function PATCH(request) {
     const adminUser =
       await verifyAdmin(request);
 
-    const body = await request.json();
+    const body =
+      await request.json();
 
     const {
       uid,
@@ -131,7 +152,8 @@ export async function PATCH(request) {
     if (!uid) {
       return NextResponse.json(
         {
-          error: "User ID is required.",
+          error:
+            "User ID is required.",
         },
         {
           status: 400,
@@ -145,7 +167,8 @@ export async function PATCH(request) {
     ) {
       return NextResponse.json(
         {
-          error: "Invalid status.",
+          error:
+            "Invalid status.",
         },
         {
           status: 400,
@@ -159,7 +182,8 @@ export async function PATCH(request) {
     ) {
       return NextResponse.json(
         {
-          error: "Invalid role.",
+          error:
+            "Invalid role.",
         },
         {
           status: 400,
@@ -167,7 +191,6 @@ export async function PATCH(request) {
       );
     }
 
-    // Prevent admin account from being changed
     if (uid === adminUser.uid) {
       return NextResponse.json(
         {
@@ -181,7 +204,9 @@ export async function PATCH(request) {
     }
 
     const userRef =
-      adminDb.collection("users").doc(uid);
+      adminDb
+        .collection("users")
+        .doc(uid);
 
     const userSnap =
       await userRef.get();
@@ -189,7 +214,8 @@ export async function PATCH(request) {
     if (!userSnap.exists) {
       return NextResponse.json(
         {
-          error: "User not found.",
+          error:
+            "User not found.",
         },
         {
           status: 404,
@@ -206,7 +232,6 @@ export async function PATCH(request) {
     if (role !== undefined) {
       updateData.role = role;
 
-      // Teachers need approval.
       if (
         role === "teacher" &&
         status === undefined
@@ -229,7 +254,9 @@ export async function PATCH(request) {
       );
     }
 
-    await userRef.update(updateData);
+    await userRef.update(
+      updateData
+    );
 
     return NextResponse.json({
       success: true,
@@ -242,17 +269,29 @@ export async function PATCH(request) {
       error
     );
 
-    if (error.message === "UNAUTHORIZED") {
+    if (
+      error?.message === "UNAUTHORIZED"
+    ) {
       return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
+        {
+          error: "Unauthorized",
+        },
+        {
+          status: 401,
+        }
       );
     }
 
-    if (error.message === "FORBIDDEN") {
+    if (
+      error?.message === "FORBIDDEN"
+    ) {
       return NextResponse.json(
-        { error: "Forbidden" },
-        { status: 403 }
+        {
+          error: "Forbidden",
+        },
+        {
+          status: 403,
+        }
       );
     }
 
@@ -277,14 +316,16 @@ export async function DELETE(request) {
     const adminUser =
       await verifyAdmin(request);
 
-    const body = await request.json();
+    const body =
+      await request.json();
 
     const { uid } = body;
 
     if (!uid) {
       return NextResponse.json(
         {
-          error: "User ID is required.",
+          error:
+            "User ID is required.",
         },
         {
           status: 400,
@@ -292,8 +333,6 @@ export async function DELETE(request) {
       );
     }
 
-    // Never allow the admin to delete
-    // their own account.
     if (uid === adminUser.uid) {
       return NextResponse.json(
         {
@@ -307,7 +346,9 @@ export async function DELETE(request) {
     }
 
     const userRef =
-      adminDb.collection("users").doc(uid);
+      adminDb
+        .collection("users")
+        .doc(uid);
 
     const userSnap =
       await userRef.get();
@@ -315,7 +356,8 @@ export async function DELETE(request) {
     if (!userSnap.exists) {
       return NextResponse.json(
         {
-          error: "User not found.",
+          error:
+            "User not found.",
         },
         {
           status: 404,
@@ -323,10 +365,8 @@ export async function DELETE(request) {
       );
     }
 
-    // Delete Firebase Authentication account
     await adminAuth.deleteUser(uid);
 
-    // Delete Firestore user document
     await userRef.delete();
 
     return NextResponse.json({
@@ -340,17 +380,29 @@ export async function DELETE(request) {
       error
     );
 
-    if (error.message === "UNAUTHORIZED") {
+    if (
+      error?.message === "UNAUTHORIZED"
+    ) {
       return NextResponse.json(
-        { error: "Unauthorized" },
-        { status: 401 }
+        {
+          error: "Unauthorized",
+        },
+        {
+          status: 401,
+        }
       );
     }
 
-    if (error.message === "FORBIDDEN") {
+    if (
+      error?.message === "FORBIDDEN"
+    ) {
       return NextResponse.json(
-        { error: "Forbidden" },
-        { status: 403 }
+        {
+          error: "Forbidden",
+        },
+        {
+          status: 403,
+        }
       );
     }
 
