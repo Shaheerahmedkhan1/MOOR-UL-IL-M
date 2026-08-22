@@ -1,0 +1,1343 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Work+Sans:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap');
+
+:root {
+  --color-bg: #1E1B4B;
+  --color-bg-light: #2A2660;
+  --color-gold: #FFB627;
+  --color-coral: #FF6B4A;
+  --color-emerald: #2DD4BF;
+  --color-cream: #F6F3EA;
+
+  --color-card: rgba(255, 255, 255, 0.035);
+  --color-card-hover: rgba(255, 255, 255, 0.06);
+  --color-border: rgba(255, 182, 39, 0.16);
+  --color-border-soft: rgba(246, 243, 234, 0.08);
+
+  --font-display: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+}
+
+
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  position: relative;
+
+  font-family: var(--font-body);
+
+  background:
+    radial-gradient(
+      circle at 12% 18%,
+      rgba(255, 182, 39, 0.08),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 88% 30%,
+      rgba(255, 107, 74, 0.07),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(45, 212, 191, 0.055),
+      transparent 32%
+    ),
+    var(--color-bg);
+
+  color: var(--color-cream);
+}
+
+
+/* =========================================================
+   GLOBAL WEBSITE LIGHT BLOBS
+   Home Page jaisa atmosphere poori website par
+========================================================= */
+
+body::before,
+body::after {
+  content: "";
+
+  position: fixed;
+
+  width: 380px;
+  height: 380px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  filter: blur(85px);
+
+  opacity: 0.16;
+
+  will-change: transform;
+}
+
+body::before {
+  top: 8%;
+  left: -130px;
+
+  background: var(--color-gold);
+
+  animation:
+    globalBlobOne
+    16s
+    ease-in-out
+    infinite;
+}
+
+body::after {
+  right: -140px;
+  bottom: 5%;
+
+  background: var(--color-coral);
+
+  animation:
+    globalBlobTwo
+    19s
+    ease-in-out
+    infinite;
+}
+
+@keyframes globalBlobOne {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  25% {
+    transform:
+      translate3d(130px, 90px, 0)
+      scale(1.08);
+  }
+
+  50% {
+    transform:
+      translate3d(230px, 180px, 0)
+      scale(0.92);
+  }
+
+  75% {
+    transform:
+      translate3d(110px, 260px, 0)
+      scale(1.12);
+  }
+}
+
+@keyframes globalBlobTwo {
+  0%,
+  100% {
+    transform:
+      translate3d(0, 0, 0)
+      scale(1);
+  }
+
+  25% {
+    transform:
+      translate3d(-120px, -80px, 0)
+      scale(1.1);
+  }
+
+  50% {
+    transform:
+      translate3d(-220px, -180px, 0)
+      scale(0.94);
+  }
+
+  75% {
+    transform:
+      translate3d(-100px, -260px, 0)
+      scale(1.08);
+  }
+}
+
+
+/* =========================================================
+   CONTENT ABOVE GLOBAL BLOBS
+========================================================= */
+
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HEADINGS & LINKS
+========================================================= */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+@keyframes btnBounce {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  30% {
+    transform: scale(1.15) rotate(-2deg);
+  }
+
+  50% {
+    transform: scale(0.95) rotate(2deg);
+  }
+
+  70% {
+    transform: scale(1.08) rotate(-1deg);
+  }
+
+  100% {
+    transform: scale(1.1) rotate(0deg);
+  }
+}
+
+.btn {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.btn:hover {
+  animation:
+    btnBounce
+    0.6s
+    cubic-bezier(0.34, 1.56, 0.64, 1)
+    forwards;
+}
+
+.btn:active {
+  transform: scale(0.9) !important;
+}
+
+.btn-primary {
+  background: var(--color-gold);
+  color: #1E1B4B;
+
+  box-shadow:
+    0 4px 14px
+    rgba(255, 182, 39, 0.3);
+}
+
+.btn-primary:hover {
+  box-shadow:
+    0 16px 32px
+    rgba(255, 182, 39, 0.55);
+
+  background: #ffc85c;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-cream);
+
+  border:
+    1px solid
+    rgba(246, 243, 234, 0.18);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-gold);
+
+  color: var(--color-gold);
+
+  background:
+    rgba(255, 182, 39, 0.1);
+
+  box-shadow:
+    0 16px 32px
+    rgba(255, 182, 39, 0.25);
+}
+
+
+/* =========================================================
+   HERO TEXT ENTRANCE
+========================================================= */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform:
+      translateY(0)
+      translateX(0);
+
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translateY(-140px)
+      translateX(20px);
+
+    opacity: 0;
+  }
+}
+
+.hero-eyebrow {
+  opacity: 0;
+
+  animation:
+    fadeInUp
+    0.7s
+    ease
+    forwards;
+
+  animation-delay: 0.1s;
+}
+
+.hero-title {
+  opacity: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #F6F3EA,
+      #FFB627,
+      #FF6B4A,
+      #FFB627,
+      #F6F3EA
+    );
+
+  background-size: 300% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+  animation:
+    fadeInUp 0.8s ease forwards,
+    shimmer 6s ease-in-out infinite;
+
+  animation-delay: 0.25s;
+}
+
+.hero-sub {
+  opacity: 0;
+
+  animation:
+    fadeInUp
+    0.8s
+    ease
+    forwards;
+
+  animation-delay: 0.45s;
+}
+
+.hero-urdu {
+  opacity: 0;
+
+  animation:
+    fadeInUp
+    0.8s
+    ease
+    forwards;
+
+  animation-delay: 0.6s;
+}
+
+.hero-buttons {
+  opacity: 0;
+
+  animation:
+    fadeInUp
+    0.8s
+    ease
+    forwards;
+
+  animation-delay: 0.75s;
+}
+
+.particle {
+  position: absolute;
+
+  bottom: 0;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: var(--color-gold);
+
+  animation:
+    particleFloat
+    linear
+    infinite;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HERO BACKGROUND
+========================================================= */
+
+@keyframes bgShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.hero-bg-animated {
+  position: relative;
+
+  background:
+    linear-gradient(
+      120deg,
+      #1E1B4B,
+      #2A2660,
+      #1E1B4B,
+      #2f1f5e,
+      #1E1B4B
+    );
+
+  background-size: 300% 300%;
+
+  animation:
+    bgShift
+    12s
+    ease
+    infinite;
+
+  isolation: isolate;
+}
+
+.hero-bg-animated::before,
+.hero-bg-animated::after {
+  z-index: -1;
+}
+
+@keyframes titlePop {
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(40px)
+      scale(0.85);
+  }
+
+  60% {
+    opacity: 1;
+
+    transform:
+      translateY(-6px)
+      scale(1.03);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
+.hero-title-pop {
+  animation:
+    titlePop
+    1s
+    cubic-bezier(0.34, 1.56, 0.64, 1)
+    forwards;
+
+  animation-delay: 0.3s;
+}
+
+
+/* =========================================================
+   STARS
+========================================================= */
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+
+    transform:
+      scale(0.8)
+      translateY(0px);
+
+    box-shadow:
+      0 0 0px
+      rgba(255, 182, 39, 0);
+  }
+
+  25% {
+    opacity: 0.9;
+
+    transform:
+      scale(1.3)
+      translateY(-4px);
+
+    box-shadow:
+      0 0 6px
+      rgba(255, 182, 39, 0.8);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      scale(1.6)
+      translateY(-8px);
+
+    box-shadow:
+      0 0 12px
+      rgba(255, 182, 39, 1);
+  }
+
+  75% {
+    opacity: 0.7;
+
+    transform:
+      scale(1.2)
+      translateY(-4px);
+
+    box-shadow:
+      0 0 6px
+      rgba(255, 182, 39, 0.6);
+  }
+}
+
+.star {
+  position: absolute;
+
+  border-radius: 50%;
+
+  background: var(--color-gold);
+
+  animation:
+    twinkle
+    ease-in-out
+    infinite;
+
+  will-change:
+    transform,
+    opacity;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   BLOBS
+========================================================= */
+
+@keyframes orbFloat {
+  0%,
+  100% {
+    transform:
+      translate(0, 0)
+      scale(1);
+  }
+
+  20% {
+    transform:
+      translate(55px, 45px)
+      scale(1.04);
+  }
+
+  40% {
+    transform:
+      translate(85px, 70px)
+      scale(0.98);
+  }
+
+  60% {
+    transform:
+      translate(65px, 50px)
+      scale(1.06);
+  }
+
+  80% {
+    transform:
+      translate(30px, 25px)
+      scale(1.03);
+  }
+}
+
+
+/* =========================================================
+   BLOB GLOW
+========================================================= */
+
+@keyframes orbGlow {
+  0%,
+  100% {
+    opacity: 0.35;
+
+    filter: blur(6px);
+
+    box-shadow:
+      0 0 14px 4px
+      currentColor;
+  }
+
+  25% {
+    opacity: 0.55;
+
+    filter: blur(5px);
+
+    box-shadow:
+      0 0 22px 7px
+      currentColor;
+  }
+
+  50% {
+    opacity: 0.85;
+
+    filter: blur(3px);
+
+    box-shadow:
+      0 0 30px 10px
+      currentColor;
+  }
+
+  75% {
+    opacity: 0.55;
+
+    filter: blur(5px);
+
+    box-shadow:
+      0 0 22px 7px
+      currentColor;
+  }
+}
+
+
+/* =========================================================
+   MAIN BLOB
+========================================================= */
+
+.mesh-blob {
+  position: absolute;
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+
+  /*
+    White border remove.
+    Ab blob ke around white line nahi hogi.
+  */
+  border: none;
+
+  z-index: 0 !important;
+
+  pointer-events: none;
+
+  animation:
+    orbFloat
+    12s
+    ease-in-out
+    infinite,
+
+    orbGlow
+    7s
+    ease-in-out
+    infinite;
+
+  will-change:
+    transform,
+    opacity,
+    filter;
+}
+
+
+/* =========================================================
+   BLOB RHYTHM
+========================================================= */
+
+.mesh-blob:nth-of-type(1) {
+  animation-delay:
+    0s,
+    0s;
+}
+
+.mesh-blob:nth-of-type(2) {
+  animation-delay:
+    2s,
+    2.5s;
+}
+
+.mesh-blob:nth-of-type(3) {
+  animation-delay:
+    4s,
+    4.5s;
+}
+
+.mesh-blob:nth-of-type(4) {
+  animation-delay:
+    6s,
+    6.5s;
+}
+
+
+/* =========================================================
+   CONTENT KO BLOBS KE UPAR RAKHNA
+========================================================= */
+
+.hero-icon-wrap {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-eyebrow,
+.hero-title,
+.hero-sub,
+.hero-urdu,
+.hero-buttons {
+  position: relative;
+  z-index: 2;
+}
+
+.navbar {
+  z-index: 10;
+}
+
+
+/* =========================================================
+   HERO ICON
+========================================================= */
+
+@keyframes floatIcon {
+  0%,
+  100% {
+    transform:
+      translateY(0px);
+  }
+
+  50% {
+    transform:
+      translateY(-12px);
+  }
+}
+
+@keyframes iconGlowPulse {
+  0%,
+  100% {
+    filter:
+      drop-shadow(
+        0 0 18px
+        rgba(255, 182, 39, 0.7)
+      )
+      drop-shadow(
+        0 0 35px
+        rgba(255, 182, 39, 0.3)
+      );
+  }
+
+  50% {
+    filter:
+      drop-shadow(
+        0 0 30px
+        rgba(255, 182, 39, 1)
+      )
+      drop-shadow(
+        0 0 55px
+        rgba(255, 182, 39, 0.5)
+      );
+  }
+}
+
+@keyframes sparkleTwinkle {
+  0%,
+  100% {
+    opacity: 0;
+
+    transform:
+      scale(0.5);
+  }
+
+  50% {
+    opacity: 1;
+
+    transform:
+      scale(1.2);
+  }
+}
+
+.hero-icon-wrap {
+  position: relative;
+
+  width: 90px;
+  height: 90px;
+
+  margin:
+    0 auto 20px;
+
+  animation:
+    floatIcon
+    3.5s
+    ease-in-out
+    infinite;
+
+  z-index: 2;
+}
+
+.hero-icon-svg {
+  animation:
+    iconGlowPulse
+    3s
+    ease-in-out
+    infinite;
+}
+
+.hero-sparkle {
+  position: absolute;
+
+  color: var(--color-gold);
+
+  animation:
+    sparkleTwinkle
+    ease-in-out
+    infinite;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding:
+    24px 40px;
+
+  z-index: 10;
+}
+
+.navbar-logo {
+  font-family:
+    var(--font-display);
+
+  font-weight: 800;
+
+  font-size: 20px;
+
+  color:
+    var(--color-cream);
+
+  text-decoration: none;
+
+  letter-spacing: 0.5px;
+}
+
+.navbar-logo span {
+  color:
+    var(--color-gold);
+}
+
+.navbar-links {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-link {
+  color:
+    var(--color-gold);
+
+  text-decoration: none;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  padding:
+    8px 16px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(255, 182, 39, 0.3);
+
+  background:
+    rgba(255, 182, 39, 0.08);
+
+  display: inline-block;
+
+  transition:
+    box-shadow 0.3s ease,
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.navbar-link:hover {
+  animation:
+    btnBounce
+    0.6s
+    cubic-bezier(0.34, 1.56, 0.64, 1)
+    forwards;
+
+  background:
+    var(--color-gold);
+
+  color:
+    #1E1B4B;
+
+  box-shadow:
+    0 10px 24px
+    rgba(255, 182, 39, 0.4);
+}
+
+
+/* =========================================================
+   SUBJECT CARDS
+========================================================= */
+
+.subject-card {
+  border:
+    1px solid
+    var(--color-border);
+
+  border-radius: 14px;
+
+  padding: 20px;
+
+  background:
+    var(--color-card);
+
+  backdrop-filter:
+    blur(8px);
+
+  transition:
+    transform 0.25s
+      cubic-bezier(0.34, 1.56, 0.64, 1),
+
+    box-shadow 0.3s ease,
+
+    border-color 0.3s ease,
+
+    background 0.3s ease;
+
+  cursor: pointer;
+}
+
+.subject-card:hover {
+  transform:
+    translateY(-4px)
+    scale(1.02);
+
+  border-color:
+    var(--color-gold);
+
+  background:
+    var(--color-card-hover);
+
+  box-shadow:
+    0 14px 30px
+    rgba(255, 182, 39, 0.15);
+}
+
+
+/* =========================================================
+   CARD COLOR VARIATIONS
+   Yellow ke saath Coral / Emerald
+========================================================= */
+
+.subject-card:nth-child(3n + 2) {
+  border-color:
+    rgba(255, 107, 74, 0.22);
+}
+
+.subject-card:nth-child(3n + 2):hover {
+  border-color:
+    var(--color-coral);
+
+  box-shadow:
+    0 14px 30px
+    rgba(255, 107, 74, 0.16);
+}
+
+.subject-card:nth-child(3n) {
+  border-color:
+    rgba(45, 212, 191, 0.2);
+}
+
+.subject-card:nth-child(3n):hover {
+  border-color:
+    var(--color-emerald);
+
+  box-shadow:
+    0 14px 30px
+    rgba(45, 212, 191, 0.14);
+}
+
+
+/* =========================================================
+   URDU TEXT
+========================================================= */
+
+.urdu-text {
+  font-family:
+    'Noto Nastaliq Urdu',
+    serif;
+
+  line-height: 2.7;
+
+  direction: rtl;
+}
+
+
+/* =========================================================
+   FORM INPUTS
+========================================================= */
+
+@keyframes inputGlowPulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 8px
+      rgba(255, 182, 39, 0.35);
+  }
+
+  50% {
+    box-shadow:
+      0 0 16px
+      rgba(255, 182, 39, 0.7);
+  }
+}
+
+.form-input {
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+.form-input:focus {
+  border-color:
+    var(--color-gold) !important;
+
+  animation:
+    inputGlowPulse
+    1.6s
+    ease-in-out
+    infinite;
+}
+
+.form-input:-webkit-autofill,
+.form-input:-webkit-autofill:hover,
+.form-input:-webkit-autofill:focus {
+  -webkit-text-fill-color:
+    var(--color-cream);
+
+  transition:
+    background-color
+    9999s
+    ease-in-out
+    0s;
+
+  box-shadow:
+    0 0 0px 1000px
+    rgba(255, 255, 255, 0.05)
+    inset;
+}
+
+
+/* =========================================================
+   ROLE TOGGLE BUTTONS
+========================================================= */
+
+.role-btn:hover {
+  box-shadow:
+    0 0 14px
+    rgba(255, 182, 39, 0.4);
+}
+
+
+/* =========================================================
+   INPUT TEXT SELECTION
+========================================================= */
+
+.form-input::selection {
+  background:
+    rgba(255, 182, 39, 0.35);
+
+  color:
+    var(--color-cream);
+}
+
+
+/* =========================================================
+   REMOVE WHITE BORDERS
+   Admin panel / other Tailwind elements
+========================================================= */
+
+/*
+  Agar kisi page par Tailwind ne white border
+  diya hua hai to woh ab dark/glass border ban jayega.
+*/
+
+:where([class*="border-white"]) {
+  border-color:
+    rgba(246, 243, 234, 0.09) !important;
+}
+
+
+/*
+  Pure white solid borders ko bhi remove/soft
+  kiya gaya hai.
+*/
+
+:where([style*="border: 1px solid white"]),
+:where([style*="border:1px solid white"]),
+:where([style*="border-color: white"]),
+:where([style*="border-color:#fff"]),
+:where([style*="border-color: #fff"]) {
+  border-color:
+    rgba(246, 243, 234, 0.09) !important;
+}
+
+
+/* =========================================================
+   SOFT GLASS PANELS
+   Admin / dashboard type cards ke liye
+========================================================= */
+
+.glass-card {
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border:
+    1px solid
+    rgba(246, 243, 234, 0.08);
+
+  backdrop-filter:
+    blur(10px);
+
+  box-shadow:
+    0 10px 35px
+    rgba(0, 0, 0, 0.12);
+
+  border-radius: 16px;
+}
+
+
+/* =========================================================
+   COLOR UTILITY CLASSES
+========================================================= */
+
+.accent-gold {
+  color:
+    var(--color-gold);
+}
+
+.accent-coral {
+  color:
+    var(--color-coral);
+}
+
+.accent-emerald {
+  color:
+    var(--color-emerald);
+}
+
+.bg-gold-soft {
+  background:
+    rgba(255, 182, 39, 0.10);
+}
+
+.bg-coral-soft {
+  background:
+    rgba(255, 107, 74, 0.10);
+}
+
+.bg-emerald-soft {
+  background:
+    rgba(45, 212, 191, 0.10);
+}
+
+
+/* =========================================================
+   YELLOW BLOCKS KO LESS REPETITIVE BANANA
+========================================================= */
+
+/*
+  Existing yellow-looking Tailwind blocks ko slightly
+  softer/glass appearance diya gaya hai.
+*/
+
+:where([class*="bg-yellow-"]) {
+  box-shadow:
+    0 8px 24px
+    rgba(255, 182, 39, 0.12);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+  .navbar {
+    padding:
+      18px 20px;
+  }
+
+  .navbar-links {
+    gap: 10px;
+  }
+
+  .navbar-link {
+    font-size: 12px;
+
+    padding:
+      6px 12px;
+  }
+
+  .mesh-blob {
+    animation-duration:
+      14s,
+      8s;
+  }
+
+  body::before,
+  body::after {
+    width: 260px;
+    height: 260px;
+
+    filter:
+      blur(70px);
+
+    opacity: 0.13;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .mesh-blob,
+  .star,
+  .particle,
+  .hero-icon-wrap,
+  .hero-icon-svg,
+  body::before,
+  body::after {
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+  }
+}/* =========================================================
+   SELECTION BUTTON HOVER GLOW (gold/emerald match)
+========================================================= */
+
+.btn-outline.glow-hover-gold:hover {
+  border-color: var(--color-gold) !important;
+  color: var(--color-gold) !important;
+  background: rgba(255, 182, 39, 0.15) !important;
+  box-shadow: 0 0 18px rgba(255, 182, 39, 0.35) !important;
+}
+
+.btn-outline.glow-hover-emerald:hover {
+  border-color: var(--color-emerald) !important;
+  color: var(--color-emerald) !important;
+  background: rgba(45, 212, 191, 0.12) !important;
+  box-shadow: 0 0 18px rgba(45, 212, 191, 0.35) !important;
+}
