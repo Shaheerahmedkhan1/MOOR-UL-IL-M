@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+import { adminAuth, adminDb } from "@/lib/firebaseAdmin";
 
 const ADMIN_EMAIL =
   "hafizshaheerahmedkhan@gmail.com";
@@ -54,13 +54,6 @@ async function verifyAdmin(request) {
 // ======================================================
 
 export async function GET(request) {
-  // TEMPORARY TEST
-  // This checks whether the API route itself is working.
-  // Firebase is intentionally not called here.
-  return NextResponse.json({
-    test: "API ROUTE WORKING",
-  });
-
   try {
     await verifyAdmin(request);
 
@@ -174,6 +167,7 @@ export async function PATCH(request) {
       );
     }
 
+    // Prevent admin account from being changed
     if (uid === adminUser.uid) {
       return NextResponse.json(
         {
@@ -212,6 +206,7 @@ export async function PATCH(request) {
     if (role !== undefined) {
       updateData.role = role;
 
+      // Teachers need approval.
       if (
         role === "teacher" &&
         status === undefined
@@ -297,6 +292,8 @@ export async function DELETE(request) {
       );
     }
 
+    // Never allow the admin to delete
+    // their own account.
     if (uid === adminUser.uid) {
       return NextResponse.json(
         {
@@ -326,8 +323,10 @@ export async function DELETE(request) {
       );
     }
 
+    // Delete Firebase Authentication account
     await adminAuth.deleteUser(uid);
 
+    // Delete Firestore user document
     await userRef.delete();
 
     return NextResponse.json({
